@@ -31,6 +31,7 @@ class Person(Base):
 
     user = relationship("User", back_populates="persons")
     weights = relationship("Weight", back_populates="person")
+    trainings = relationship("Training", back_populates="person")
 
     createAt: Mapped[datetime] = mapped_column(DateTime, default=datetime.now())
     updateAt: Mapped[datetime] = mapped_column(DateTime, onupdate=datetime.now(), nullable=True)
