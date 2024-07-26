@@ -29,7 +29,7 @@ class Training(Base):
     person_id: Mapped[int] = mapped_column(Integer, ForeignKey("persons.id"))
     type_training: Mapped[TrainingType] = mapped_column(Enum(TrainingType))
     trainings: Mapped[List[str]] = mapped_column(ARRAY(String))
-    descript: Mapped[str] = mapped_column(String(128), nullable=True)
+    descript: Mapped[str] = mapped_column(String(128))
 
     person = relationship("Person", back_populates="trainings")
     kilo_calories = relationship("KiloCalorie", back_populates="training")
