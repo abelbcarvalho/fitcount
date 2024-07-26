@@ -1,8 +1,12 @@
 from datetime import datetime
 
+from decimal import Decimal
+
 from sqlalchemy import (
-    String,
     DateTime,
+    Numeric,
+    Integer,
+    ForeignKey,
 )
 
 from sqlalchemy.orm import (
@@ -14,15 +18,14 @@ from sqlalchemy.orm import (
 from src.db.models.base import Base
 
 
-class User(Base):
-    __tablename__ = "users"
+class Weight(Base):
+    __tablename__ = "weigths"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_name: Mapped[str] = mapped_column(String(32), unique=True)
-    email: Mapped[str] = mapped_column(String(255), unique=True, nullable=True)
-    passwd: Mapped[str] = mapped_column(String(255))
+    person_id: Mapped[int] = mapped_column(Integer, ForeignKey("persons.id"))
+    weight: Mapped[Decimal] = mapped_column(Numeric(10, 2))
 
-    persons = relationship("Person", back_populates="user")
+    person = relationship("Person", back_populates="weights")
 
     createAt: Mapped[datetime] = mapped_column(DateTime, default=datetime.now())
     updateAt: Mapped[datetime] = mapped_column(DateTime, onupdate=datetime.now(), nullable=True)

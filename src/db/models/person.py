@@ -30,6 +30,7 @@ class Person(Base):
     weight: Mapped[Decimal] = mapped_column(Numeric(10, 2))
 
     user = relationship("User", back_populates="persons")
+    weights = relationship("Weight", back_populates="person")
 
     createAt: Mapped[datetime] = mapped_column(DateTime, default=datetime.now())
     updateAt: Mapped[datetime] = mapped_column(DateTime, onupdate=datetime.now(), nullable=True)
