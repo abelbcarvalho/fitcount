@@ -7,7 +7,8 @@ from sqlalchemy import (
 
 from sqlalchemy.orm import (
     mapped_column,
-    Mapped
+    relationship,
+    Mapped,
 )
 
 from src.db.models.base import Base
@@ -21,5 +22,7 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=True)
     passwd: Mapped[str] = mapped_column(String(255))
 
+    persons = relationship("Person", back_populates="users")
+
     createAt: Mapped[datetime] = mapped_column(DateTime, default=datetime.now())
-    updateAt: Mapped[datetime] = mapped_column(DateTime, onupdate=datetime.now())
+    updateAt: Mapped[datetime] = mapped_column(DateTime, onupdate=datetime.now(), nullable=True)
