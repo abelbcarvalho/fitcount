@@ -24,6 +24,7 @@ class Person(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
+
     first_name: Mapped[str] = mapped_column(String(32))
     last_name: Mapped[str] = mapped_column(String(128))
     height: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=True)

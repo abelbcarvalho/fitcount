@@ -23,6 +23,7 @@ class Weight(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     person_id: Mapped[int] = mapped_column(Integer, ForeignKey("persons.id"))
+
     weight: Mapped[Decimal] = mapped_column(Numeric(10, 2))
 
     person = relationship("Person", back_populates="weights")

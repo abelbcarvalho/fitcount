@@ -23,7 +23,7 @@ from src.db.models.base import Base
 
 
 class Training(Base):
-    __tablename__ = "training"
+    __tablename__ = "trainings"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     person_id: Mapped[int] = mapped_column(Integer, ForeignKey("persons.id"))
@@ -32,6 +32,7 @@ class Training(Base):
     descript: Mapped[str] = mapped_column(String(128), nullable=True)
 
     person = relationship("Person", back_populates="trainings")
+    kilo_calories = relationship("KiloCalorie", back_populates="training")
 
     createAt: Mapped[datetime] = mapped_column(DateTime, default=datetime.now())
     updateAt: Mapped[datetime] = mapped_column(DateTime, onupdate=datetime.now(), nullable=True)
