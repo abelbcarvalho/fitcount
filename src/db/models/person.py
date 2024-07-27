@@ -8,6 +8,7 @@ from sqlalchemy import (
     Numeric,
     Integer,
     ForeignKey,
+    Enum,
 )
 
 from sqlalchemy.orm import (
@@ -17,6 +18,7 @@ from sqlalchemy.orm import (
 )
 
 from src.db.models.base import Base
+from src.utilities.enum.enums import Gender
 
 
 class Person(Base):
@@ -27,6 +29,7 @@ class Person(Base):
 
     first_name: Mapped[str] = mapped_column(String(32))
     last_name: Mapped[str] = mapped_column(String(128))
+    gender: Mapped[Gender] = mapped_column(Enum(Gender))
     height: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=True)
     weight: Mapped[Decimal] = mapped_column(Numeric(10, 2))
 
